@@ -1,0 +1,41 @@
+{% if session|default and session.user.role == 1 %} {% if data %}
+<div class="row row-cols-1 row-cols-lg-4 g-4">
+  {% for user in data %}
+  <div class="col">
+    <div class="card h-100 p-3">
+      <p class="text-secondary mb-1"><strong>Имя пользователя:</strong></p>
+      <p class="mb-0">{{ user.name }}</p>
+      <hr />
+      <p class="text-secondary mb-1"><strong>Почта:</strong></p>
+      <p class="mb-0">{{ user.email }}</p>
+      <hr />
+      <p class="text-secondary mb-1"><strong>Роль:</strong></p>
+      <p class="mb-0">
+        {% if user.role == 1 %} Администратор {% elseif user.role == 2 %}
+        Пользователь {% endif %}
+      </p>
+      <hr />
+      <form action="?path=users/{{ user.role }}/{{ user.id }}" method="POST">
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary" name="edit" type="submit">
+            {% if user.role == 1 %} Сделать пользователем {% elseif user.role ==
+            2 %} Сделать администратором {% endif %}
+          </button>
+          <button class="btn btn-danger" name="delete" type="submit">
+            Удалить
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-primary text-center mt-3" role="alert">
+  Пользователи не найдены!
+</div>
+{% endif %} {% else %}
+<div class="alert alert-danger text-center" role="alert">
+  Страница не найдена!
+</div>
+{% endif %}

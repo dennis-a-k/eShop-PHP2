@@ -1,0 +1,68 @@
+<header class="border-bottom">
+  <div
+    class="
+      container
+      d-flex
+      flex-wrap
+      align-items-center
+      justify-content-center justify-content-md-between
+      py-3
+    "
+  >
+    <a
+      href="/"
+      class="
+        d-flex
+        align-items-center
+        col-md-3
+        mb-2 mb-md-0
+        text-dark text-decoration-none
+      "
+    >
+      <strong class="h2 text-primary text-opacity-75 mx-5">eShop</strong>
+    </a>
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+      {% if session|default %} {% if session.user.role == 1 %}
+      <li>
+        <a href="?path=products" class="nav-link px-2 link-dark">Товары</a>
+      </li>
+      <li>
+        <a href="?path=orders" class="nav-link px-2 link-dark">Заказы</a>
+      </li>
+      <li>
+        <a href="?path=users" class="nav-link px-2 link-dark">Пользователи</a>
+      </li>
+      {% endif %}
+      <li>
+        <a href="?path=user" class="nav-link px-2 link-secondary">Профиль</a>
+      </li>
+      {% endif %}
+    </ul>
+    <div class="col-md-4 text-end">
+      <a
+        href="?path=cart"
+        class="btn btn-outline-secondary me-2 position-relative"
+        >Корзина {% if cart %}
+        <span
+          class="
+            position-absolute
+            top-0
+            start-100
+            translate-middle
+            badge
+            rounded-pill
+            bg-danger
+          "
+        >
+          {{ cart }}
+        </span>
+        {% endif %}
+      </a>
+      {% if session|default %}
+      <a href="?path=logout" class="btn btn-secondary">Выйти</a>
+      {% else %}
+      <a href="?path=login" class="btn btn-secondary">Войти</a>
+      {% endif %}
+    </div>
+  </div>
+</header>

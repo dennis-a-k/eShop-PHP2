@@ -1,0 +1,62 @@
+{% if session|default and session.user.role == 1 %} {% if data %}
+<div class="card p-3">
+  {% for key, order in data %}
+  <dl class="row p-3 border">
+    <dt class="col-lg-2">
+      <p>{{ order.user.name }}</p>
+      {% if order.user.completed == 0 %}
+      <a
+        href="?path=orders/user/{{ order.user.id_user }}"
+        class="alert alert-success text-success text-decoration-none p-2"
+      >
+        Оформить!
+      </a>
+      {% elseif order.user.completed == 1 %}
+      <span class="alert alert-warning text-warning text-decoration-none p-2"
+        >Выполнен!</span
+      >
+      {% endif %}
+    </dt>
+
+    <dd class="col-lg-5">
+      {% set sum = 0 %}{% for key, value in order.goods %}
+      <p class="text-center mt-3">
+        <span class="text-secondary">Товар:</span>
+        {{ key }} &times; {{ value.count }} шт. = {{ (value.count *
+        value.price)|number_format(2, '.', ' ') }} {% set sum = sum +
+        (value.count * value.price) %} ₽
+      </p>
+      {% endfor %}
+      <p class="text-secondary text-center">
+        <em>{{ order.user.date }}</em>
+      </p>
+    </dd>
+
+    <dd class="col-lg-5">
+      <p class="m-1">
+        <span class="text-secondary">Адрес:</span>
+        {{ order.user.address }}
+      </p>
+      <p class="m-1">
+        <span class="text-secondary">Телефон:</span>
+        {{ order.user.phone }}
+      </p>
+      <p class="m-1">
+        <span class="text-secondary">Почта:</span>
+        {{ order.user.email }}
+      </p>
+      <p class="m-1 fw-bold">
+        <span class="text-secondary">Итого к оплате:</span>
+        {{ sum|number_format(2, '.', ' ') }} ₽
+      </p>
+    </dd>
+  </dl>
+  {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-danger text-center" role="alert">Заказов нет!</div>
+{% endif %} {% else %}
+<div class="alert alert-danger text-center" role="alert">
+  Страница не найдена!
+</div>
+{% endif %}
