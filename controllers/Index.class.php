@@ -7,10 +7,10 @@ class Index extends Base
      */
     public function index()
     {
-      $this->title .= 'Интернет-магазин';
-      $this->content = '/pages/index.html';
+        $this->title .= 'Интернет-магазин';
+        $this->content = '/pages/index.html';
 
-      $goods = new Goods;
-      $this->data = $goods->getGoods();
+        $goods = new Goods;
+        $this->data = $goods->getGoods();
     }
 }

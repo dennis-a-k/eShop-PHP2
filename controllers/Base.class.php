@@ -2,9 +2,9 @@
 
 abstract class Base extends Controller
 {
-	protected $title;
+    protected $title;
     protected $layouts;
-	protected $content;
+    protected $content;
     protected $data;
     protected $date;
     protected $reviews;
@@ -13,7 +13,7 @@ abstract class Base extends Controller
 
     protected function before()
     {
-		$this->title = 'eShop | ';
+        $this->title = 'eShop | ';
         $this->layouts = 'shop.html';
         $this->date = date('Y');
         $this->cart = 0;
@@ -28,11 +28,11 @@ abstract class Base extends Controller
             $this->user['email'] = $_COOKIE['user']['email'];
             $this->user['password'] = $_COOKIE['user']['password'];
         }
-	}
-	
-	public function render()
-	{
-		$vars = [
+    }
+
+    public function render()
+    {
+        $vars = [
             'title' => $this->title,
             'content' => $this->content,
             'data' => $this->data,
@@ -42,7 +42,7 @@ abstract class Base extends Controller
             'user' => $this->user
         ];
         
-		$page = $this->template($this->layouts, $vars);				
-		echo $page;
-	}	
+        $page = $this->template($this->layouts, $vars);				
+        echo $page;
+    }
 }

@@ -76,7 +76,5 @@ class Order
         ];
 
         return DB::update($sql, $markers);
-    
-        
     }
 }
